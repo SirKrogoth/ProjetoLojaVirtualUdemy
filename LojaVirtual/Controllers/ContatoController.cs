@@ -12,6 +12,11 @@ namespace LojaVirtual.Controllers
 {
     public class ContatoController : Controller
     {
+        public IActionResult Contato()
+        {
+            return View();
+        }
+
         public IActionResult EnviarEmailContato()
         {
             Contato contato = new Contato();
@@ -51,9 +56,10 @@ namespace LojaVirtual.Controllers
                 }
 
                 ViewData["MSG_Erro"] = sb.ToString();
+                ViewData["Contato"] = contato;
             }
 
-            return View("/Views/Contato/");
+            return View("Contato");
        }
    }
 }

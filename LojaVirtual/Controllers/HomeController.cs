@@ -13,11 +13,6 @@ namespace LojaVirtual.Controllers
             return View();
         }
 
-        public IActionResult Contato()
-        {
-            return View();
-        }
-
         public IActionResult Login()
         {
             return View();
