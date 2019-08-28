@@ -39,16 +39,14 @@
                     <div>
                         <article class="card">
                             <div class="card-body p-5">
-                                <ul>
-                                    @if (ViewData["MSG_Success"] != null)
-                                    {
-                                        <p class="alert alert-success">@Html.Raw(ViewData["MSG_Success"])</p>
-                                    }
-                                    @if (ViewData["MSG_Erro"] != null)
-                                    {
-                                        <p class="alert alert-danger">@Html.Raw(ViewData["MSG_Erro"])</p>
-                                    }
-                                </ul>
+                                @if (ViewData["MSG_Success"] != null)
+                                {
+                                    <p class="alert alert-success">@Html.Raw(ViewData["MSG_Success"])</p>
+                                }
+                                @if (ViewData["MSG_Erro"] != null)
+                                {
+                                    <p class="alert alert-danger">@Html.Raw(ViewData["MSG_Erro"])</p>
+                                }
 
                                 <form role="form" method="post" action="/Contato/EnviarEmailContato">
                                     <div class="form-group">

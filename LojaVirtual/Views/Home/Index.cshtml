@@ -1,4 +1,4 @@
-﻿
+﻿@model LojaVirtual.Models.NewsLetterEmail
 @{
     ViewData["Title"] = "Index";
 }
@@ -64,15 +64,9 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-
-
-
-
         <!-- Lista de Produtos
             ================================================== -->
         <!-- Wrap the rest of the page in another container to center all the content. -->
-
-
         <div class="container" id="code_prod_complex">
             <div class="row">
                 <div class="col-md-4">
@@ -159,3 +153,29 @@
             </div> <!-- row.// -->
         </div>
     </main>
+@using (Html.BeginForm("index", "home", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 offset-3">
+                @if (TempData["MSG_S"] != null)
+                {
+                    <p class="alert alert-success">@TempData["MSG_S"]</p>
+                }
+            </div>
+            <div class="col-sm-6 offset-sm-3">
+                <div class="form-group">
+                    <label for="email">Cadastre seu e-mail para receber notícias e novidades da nossa Loja Virtual.</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                        </div>
+                        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <span style="color:red">@Html.ValidationMessageFor(m => m.Email)</span>
+                </div>
+                <button class="subscribe btn btn-primary btn-block" type="submit"> Enviar </button>
+            </div>
+        </div>
+    </div>
+}
