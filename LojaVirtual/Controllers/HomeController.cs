@@ -30,7 +30,7 @@ namespace LojaVirtual.Controllers
                 _lojaVirtualContext.Add(newsLetterEmail);
                 _lojaVirtualContext.SaveChanges();
 
-                TempData["MSG_S"] = "E-mail Cadastrado com sucesso. Agora você poderá receber as novidades da loja virtual por email.";
+                TempData["MSGS"] = "E-mail Cadastrado com sucesso. Agora você poderá receber as novidades da loja virtual por email.";
 
                 return RedirectToAction(nameof(Index));
             }
