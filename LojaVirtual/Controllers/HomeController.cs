@@ -54,7 +54,21 @@ namespace LojaVirtual.Controllers
         [HttpPost]
         public IActionResult CadastroCliente([FromForm]Cliente cliente)
         {
-            return View();
+            if(ModelState.IsValid)
+            {
+                _lojaVirtualContext.Add(cliente);
+                _lojaVirtualContext.SaveChanges();
+
+                TempData["MSG_S"] = "Cadastro realizado com sucesso.";
+
+                //TODO - Implementar redirecionamentos diferentes
+                //return RedirectToAction(nameof(CadastroCliente));
+                return View();
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult CarrinhoCompras()

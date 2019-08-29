@@ -19,50 +19,73 @@
                                     <h4 class="card-title mt-2">Sign up</h4>
                                 </header>
                                 <article class="card-body">
-                                        <div class="form-row">
-                                            <div class="col form-group">
-                                                <label asp-for="Nome">Nome</label>
-                                                <input type="text" asp-for="Nome" class="form-control" placeholder="">
-                                            </div> <!-- form-group end.// -->
-                                            <div class="col form-group">
-                                                <label asp-for="Cpf">CPF</label>
-                                                <input type="text" asp-for="Cpf" class="form-control" placeholder="">
-                                            </div> <!-- form-group end.// -->
-                                            <div class="col form-group">
-                                                <label asp-for="Nascimento">Nascimento</label>
-                                                <input type="text" asp-for="Nascimento" class="form-control" placeholder="">
-                                            </div> <!-- form-group end.// -->
-                                        </div> <!-- form-row end.// -->
-                                        <div class="form-group">
-                                            <label asp-for="Email">Email</label>
-                                            <input type="email" asp-for="Email" class="form-control" placeholder="">
-                                            <small class="form-text text-muted">
-                                                Nunca compartilhe seu email com alguem.
-                                            </small>
+                                    @if (TempData["MSG_S"] != null)
+                                    {
+                                        <p class="alert alert-success">@TempData["MSG_S"]</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="alert alert-danger">Erro ao processar a informação. Verifique os campos digitados.</p>
+                                    }
+                                    <div class="form-row">
+                                        <div class="col form-group">
+                                            <label asp-for="Nome">Nome</label>
+                                            <input type="text" asp-for="Nome" class="form-control" placeholder="">
+                                            <span asp-validation-for="Nome" style="color: red"></span>
                                         </div> <!-- form-group end.// -->
-                                        <div class="form-group">
-                                            <label class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="sexo" value="Masculino">
-                                                <span class="form-check-label"> Masculino </span>
-                                            </label>
-                                            <label class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="sexo" value="Feminino">
-                                                <span class="form-check-label"> Feminino</span>
-                                            </label>
-                                        </div> <!-- form-group final para sexo.// -->
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label asp-for="Telefone">Telefone</label>
-                                                <input type="text" asp-for="Telefone" class="form-control">
-                                            </div> <!-- form-group end.// -->
-                                        </div> <!-- form-row.// -->
-                                        <div class="form-group">
-                                            <label asp-for="Senha">Senha</label>
-                                            <input class="form-control" asp-for="Senha" type="password">
+
+                                        <div class="col form-group">
+                                            <label asp-for="Cpf">CPF</label>
+                                            <input type="text" asp-for="Cpf" class="form-control" placeholder="">
+                                            <span asp-validation-for="Cpf" style="color: red"></span>
                                         </div> <!-- form-group end.// -->
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block"> Registrar </button>
-                                        </div>
+
+                                        <div class="col form-group">
+                                            <label asp-for="Nascimento">Nascimento</label>
+                                            <input type="text" asp-for="Nascimento" class="form-control" placeholder="">
+                                            <span asp-validation-for="Nascimento" style="color: red"></span>
+                                        </div> <!-- form-group end.// -->
+                                    </div> <!-- form-row end.// -->
+
+                                    <div class="form-group">
+                                        <label asp-for="Email">Email</label>
+                                        <input type="email" asp-for="Email" class="form-control" placeholder="">
+                                        <span asp-validation-for="Email" style="color: red"></span>
+                                        <small class="form-text text-muted">
+                                            Nunca compartilhe seu email com alguem.
+                                        </small>
+                                    </div> <!-- form-group end.// -->
+
+                                    <div class="form-group">
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" asp-for="Sexo" value="Masculino">
+                                            <span class="form-check-label"> Masculino </span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" asp-for="Sexo" value="Feminino">
+                                            <span class="form-check-label"> Feminino</span>
+                                        </label>
+                                        <br />
+                                        <span asp-validation-for="Sexo" style="color: red"></span>
+                                    </div> <!-- form-group final para sexo.// -->
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label asp-for="Telefone">Telefone</label>
+                                            <input type="text" asp-for="Telefone" class="form-control">
+                                            <span asp-validation-for="Telefone" style="color: red"></span>
+                                        </div> <!-- form-group end.// -->
+                                    </div> <!-- form-row.// -->
+
+                                    <div class="form-group">
+                                        <label asp-for="Senha">Senha</label>
+                                        <input class="form-control" asp-for="Senha" type="password">
+                                        <span asp-validation-for="Senha" style="color: red"></span>
+                                    </div> <!-- form-group end.// -->
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block"> Registrar </button>
+                                    </div>
                                 </article> <!-- card-body end .// -->
                                 <div class="border-top card-body text-center">Você possui uma conta? <a asp-controller="Home" asp-action="Login">Entrar</a></div>
                             </div> <!-- card.// -->
