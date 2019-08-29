@@ -4,17 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using LojaVirtual.Database;
 using LojaVirtual.Models;
+using LojaVirtual.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LojaVirtual.Controllers
 {
     public class HomeController : Controller
     {
-        private LojaVirtualContext _lojaVirtualContext;
+        private IClienteRepository _repository;
         
-        public HomeController(LojaVirtualContext lojaVirtualContext)
+        public HomeController(IClienteRepository repository)
         {
-            _lojaVirtualContext = lojaVirtualContext;
+            _repository = repository;
         }
 
         [HttpGet]
@@ -27,8 +28,8 @@ namespace LojaVirtual.Controllers
         {
             if(ModelState.IsValid)
             {
-                _lojaVirtualContext.Add(newsLetterEmail);
-                _lojaVirtualContext.SaveChanges();
+                //_lojaVirtualContext.Add(newsLetterEmail);
+                //_lojaVirtualContext.SaveChanges();
 
                 TempData["MSGS"] = "E-mail Cadastrado com sucesso. Agora você poderá receber as novidades da loja virtual por email.";
 
@@ -56,8 +57,7 @@ namespace LojaVirtual.Controllers
         {
             if(ModelState.IsValid)
             {
-                _lojaVirtualContext.Add(cliente);
-                _lojaVirtualContext.SaveChanges();
+                _repository.Cadastrar(cliente);
 
                 TempData["MSG_S"] = "Cadastro realizado com sucesso.";
 
@@ -76,4 +76,4 @@ namespace LojaVirtual.Controllers
             return View();
         }
     }
-}   
+}
