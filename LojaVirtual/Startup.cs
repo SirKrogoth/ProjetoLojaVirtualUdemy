@@ -37,10 +37,9 @@ namespace LojaVirtual
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             var connectionString = Configuration["MysqlConnection:MysqlConnectionString"];
-
             services.AddDbContext<LojaVirtualContext>(options => options.UseSqlServer(connectionString));
 
-            services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.RegistrarServicos();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
