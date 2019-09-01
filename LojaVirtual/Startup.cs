@@ -34,12 +34,24 @@ namespace LojaVirtual
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //Criando Sessão - Configuração
+            services.AddMemoryCache();//Guardar os dados na memória
+            /*
+             Uma Sessão geralmente é legal deixar configurada em um computador específico, geralmente o computador que contar o banco de dados.
+             Isso porque como a sessão é armazenado na memória RAM, e caso haja uma queda de energia, o usuário precisará autenticar-se novamente, 
+             e por este motivo é ideal que seja instalado em um único computador, alem de um sistema de energia que possa cuidar dessas quedas.
+             */
+            services.AddSession(options=>
+            {
+
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             var connectionString = Configuration["MysqlConnection:MysqlConnectionString"];
             services.AddDbContext<LojaVirtualContext>(options => options.UseSqlServer(connectionString));
 
-            services.RegistrarServicos();
+            services.RegistrarServicos();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,14 +71,15 @@ namespace LojaVirtual
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            //Criando Sessão
+            app.UseSession();
 
-            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            });            
         }
     }
 }

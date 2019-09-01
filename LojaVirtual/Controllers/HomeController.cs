@@ -45,7 +45,14 @@ namespace LojaVirtual.Controllers
             }                        
         }
 
+        [HttpGet]
         public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login([FromBody]Cliente cliente)
         {
             return View();
         }
