@@ -36,14 +36,26 @@ namespace LojaVirtual
 
             //Criando Sessão - Configuração
             services.AddMemoryCache();//Guardar os dados na memória
-            /*
-             Uma Sessão geralmente é legal deixar configurada em um computador específico, geralmente o computador que contar o banco de dados.
-             Isso porque como a sessão é armazenado na memória RAM, e caso haja uma queda de energia, o usuário precisará autenticar-se novamente, 
-             e por este motivo é ideal que seja instalado em um único computador, alem de um sistema de energia que possa cuidar dessas quedas.
-             */
+                                      /*
+                                       Uma Sessão geralmente é legal deixar configurada em um computador específico, geralmente o computador que contar o banco de dados.
+                                       Isso porque como a sessão é armazenado na memória RAM, e caso haja uma queda de energia, o usuário precisará autenticar-se novamente, 
+                                       e por este motivo é ideal que seja instalado em um único computador, alem de um sistema de energia que possa cuidar dessas quedas.
+                                       ASP 2.2 -> https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/app-state?view=aspnetcore-2.2
+                                       */
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => false; // Default is true, make it false
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             services.AddSession(options=>
             {
-
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential
+                options.Cookie.IsEssential = true;
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
