@@ -27,6 +27,9 @@ namespace LojaVirtual
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Sessão
+            services.AddHttpContextAccessor();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -41,6 +44,7 @@ namespace LojaVirtual
                                        Isso porque como a sessão é armazenado na memória RAM, e caso haja uma queda de energia, o usuário precisará autenticar-se novamente, 
                                        e por este motivo é ideal que seja instalado em um único computador, alem de um sistema de energia que possa cuidar dessas quedas.
                                        ASP 2.2 -> https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/app-state?view=aspnetcore-2.2
+                                       E também no Stackoverflow https://stackoverflow.com/questions/49317304/asp-net-core-2-1-session
                                        */
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -62,7 +66,7 @@ namespace LojaVirtual
 
             var connectionString = Configuration["MysqlConnection:MysqlConnectionString"];
             services.AddDbContext<LojaVirtualContext>(options => options.UseSqlServer(connectionString));
-
+            
             services.RegistrarServicos();            
         }
 
