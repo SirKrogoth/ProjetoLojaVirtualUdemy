@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LojaVirtual.Database;
+using LojaVirtual.Libraries.Filtro;
 using LojaVirtual.Libraries.Sessao.Login;
 using LojaVirtual.Models;
 using LojaVirtual.Repositories;
@@ -74,14 +75,10 @@ namespace LojaVirtual.Controllers
         }
 
         [HttpGet]
+        [ClienteAutorizacao]
         public IActionResult Painel()
         {
-            Cliente cliente = _loginSessao.ObterLoginCliente();
-
-            if (cliente != null)
-                return new ContentResult() { Content = $"Usuário ID: {cliente.Id}, Email: {cliente.Email} e Nascimento: {cliente.Nascimento} está logado com sucesso." };
-            else
-                return new ContentResult() { Content = "Acesso Negado." };
+            return new ContentResult() { Content = "Este é o Painel" };
         }
 
         [HttpGet]
