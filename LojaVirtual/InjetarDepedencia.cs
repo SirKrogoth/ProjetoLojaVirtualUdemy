@@ -17,8 +17,10 @@ namespace LojaVirtual
         {            
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<INewsLetterRepository, NewsLetterRepository>();
+            services.AddScoped<IColaboradorRepository, ColaboradorRepository>();
             services.AddScoped<Sessao>();
             services.AddScoped<LoginSessao>();
+            services.AddScoped<LoginColaborador>();
         }        
     }
 }
