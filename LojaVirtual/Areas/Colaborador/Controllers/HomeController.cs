@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LojaVirtual.Libraries.Filtro;
 using LojaVirtual.Libraries.Sessao.Login;
 using LojaVirtual.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,13 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
             return View();
         }
 
+        [ColaboradorAutorizacao] 
+        public IActionResult Logout()
+        {
+            _loginColaborador.Logout();
+            return RedirectToAction("Login", "Home");
+        }
+
         [HttpPost]
         public IActionResult Login([FromForm]Models.Colaborador colaborador)
         {
@@ -44,6 +52,7 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
             }
         }
 
+        [ColaboradorAutorizacao]
         public IActionResult Painel()
         {
             return View();

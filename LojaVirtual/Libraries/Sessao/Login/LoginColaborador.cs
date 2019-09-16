@@ -25,7 +25,12 @@ namespace LojaVirtual.Libraries.Sessao.Login
             _sessao.Cadastrar(chave, loginColaboradorJSONString);
         }
 
-        public Colaborador ObterLoginCliente()
+        public void Logout()
+        {
+
+        }
+
+        public Colaborador ObterLoginColaborador()
         {
             if (_sessao.Existe(chave))
             {

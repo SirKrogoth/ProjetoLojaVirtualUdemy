@@ -16,5 +16,6 @@ namespace LojaVirtual.Repositories
 
         Colaborador ObterColaborador(int Id);
         IEnumerable<Colaborador> ObterTodosColaboradores();
+
     }
 }
