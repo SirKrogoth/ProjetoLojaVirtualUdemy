@@ -1,4 +1,5 @@
-﻿@model List<LojaVirtual.Models.Categoria>
+﻿@model X.PagedList.IPagedList<LojaVirtual.Models.Categoria>
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -9,5 +10,9 @@
 
 @foreach (Categoria categoria in Model)
 {
-    @categoria.Nome <br />
+    @categoria.Nome
+    <br />
 }
+
+<!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+@Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina }))

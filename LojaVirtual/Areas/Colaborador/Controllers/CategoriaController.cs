@@ -6,6 +6,7 @@ using LojaVirtual.Libraries.Filtro;
 using LojaVirtual.Models;
 using LojaVirtual.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using X.PagedList;
 
 namespace LojaVirtual.Areas.Colaborador.Controllers
 {
@@ -21,9 +22,15 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
             _categoriaRepository = categoriaRepository;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? pagina)
         {
-            List<Categoria> categorias = _categoriaRepository.ObterTodasCategorias().ToList();
+            /*
+             * Aqui iremos mostrar como funciona a paginação
+             * documentação
+             * https://github.com/dncuug/X.PagedList 
+             */
+            var categorias = _categoriaRepository.ObterTodasCategorias(pagina);
+
             return View(categorias);
         }
         
