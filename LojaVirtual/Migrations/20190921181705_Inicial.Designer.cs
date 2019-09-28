@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LojaVirtual.Migrations
 {
     [DbContext(typeof(LojaVirtualContext))]
-    [Migration("20190918011934_Categorias")]
-    partial class Categorias
+    [Migration("20190921181705_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
