@@ -13,13 +13,16 @@
 <br />
 <br />
 
-@if(TempData["MSG_S"] != null)
+@if (TempData["MSG_S"] != null)
 {
     <p class="alert alert-success">@ViewData["MSG_S"]</p>
 }
 
-<br/>
 <br />
+<br />
+
+<!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+@Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina }))
 
 @if (Model.Count > 0)
 {
@@ -41,14 +44,14 @@
                         <td>@categoria.Slug</td>
                         <td>
                             @*@if(categoria.CategoriaPaiId != null)
-                            {
-                                <span>@categoria.CategoriaID.Id - @categoria.CategoriaID.Nome</span>
-                            }
-                            else
-                            {
-                                <span>--</span>
-                            }*@
-                            @Html.DisplayFor(model => categoria.CategoriaPaiId) 
+                                {
+                                    <span>@categoria.CategoriaID.Id - @categoria.CategoriaID.Nome</span>
+                                }
+                                else
+                                {
+                                    <span>--</span>
+                                }*@
+                            @Html.DisplayFor(model => categoria.CategoriaPaiId)
                             -
                             @Html.DisplayFor(model => categoria.CategoriaID.Nome)
                         </td>
@@ -66,6 +69,3 @@ else
 {
     <span>Nunhum registro encontrado.</span>
 }
-
-<!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
-@Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina }))

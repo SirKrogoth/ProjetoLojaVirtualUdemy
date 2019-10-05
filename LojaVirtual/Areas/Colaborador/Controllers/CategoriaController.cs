@@ -59,18 +59,29 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
         }
 
         [HttpPost]
-        public IActionResult Atualizar([FromForm]Categoria categoria)
+        public IActionResult Atualizar([FromForm]Categoria categoria, int id)
         {
-            //TODO : Implementar Atualizar Categoria POST
+            if(ModelState.IsValid)
+            {
+                _categoriaRepository.Atualizar(categoria);
 
+                TempData["MSG_S"] = "Registro salvo com sucesso.";
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewBag.Categorias = _categoriaRepository.ObterTodasCategorias().Where(a=>a.Id != id).Select(a => new SelectListItem(a.Nome, a.Id.ToString()));
             return View();
         }
         
         [HttpGet]
-        public IActionResult Atualizar()
+        public IActionResult Atualizar(int id)
         {
-            //TODO : Implementar Atualizar Categoria GET
-            return View();
+            var categoria = _categoriaRepository.ObterCategoria(id);
+
+            ViewBag.Categorias = _categoriaRepository.ObterTodasCategorias().Where(a => a.Id != id).Select(a => new SelectListItem(a.Nome, a.Id.ToString()));
+
+            return View(categoria);
         }
 
         [HttpGet]
