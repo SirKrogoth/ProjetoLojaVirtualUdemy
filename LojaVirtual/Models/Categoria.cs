@@ -34,6 +34,7 @@ namespace LojaVirtual.Models
          * -- 4 - Mouse gamer : P : 2
          */
 
+        [Display(Name = "Categoria Pais")]
         public int? CategoriaPaiId { get; set; }
 
         //ORM Entityframeworkcore
