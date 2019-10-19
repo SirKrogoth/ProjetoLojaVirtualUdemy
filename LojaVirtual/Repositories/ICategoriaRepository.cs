@@ -15,5 +15,7 @@ namespace LojaVirtual.Repositories
         Categoria ObterCategoria(int id);
         IPagedList<Categoria> ObterTodasCategorias(int? pagina);
         IEnumerable<Categoria> ObterTodasCategorias();
+
+
     }
 }

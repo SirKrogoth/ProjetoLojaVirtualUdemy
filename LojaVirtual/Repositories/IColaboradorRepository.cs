@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace LojaVirtual.Repositories
 {
@@ -16,6 +17,8 @@ namespace LojaVirtual.Repositories
 
         Colaborador ObterColaborador(int Id);
         IEnumerable<Colaborador> ObterTodosColaboradores();
+
+        IPagedList<Colaborador> ObterTodosColaboradores(int? pagina);
 
     }
 }
