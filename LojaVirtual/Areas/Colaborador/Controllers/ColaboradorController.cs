@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using LojaVirtual.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using X.PagedList;
 
 namespace LojaVirtual.Areas.Colaborador.Controllers
 {
+    [Area("Colaborador")]
     public class ColaboradorController : Controller
     {
         private IColaboradorRepository _colaboradorRepository;
@@ -18,7 +20,9 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
 
         public IActionResult Index(int? pagina)
         {
-            return View();
+            IPagedList<Models.Colaborador> colaboradores = _colaboradorRepository.ObterTodosColaboradores(pagina);
+
+            return View(colaboradores);
         }
 
         [HttpGet]

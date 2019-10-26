@@ -50,15 +50,10 @@ namespace LojaVirtual.Repositories
             return _banco.Colaboradores.Find(Id);
         }
 
-        public IEnumerable<Colaborador> ObterTodosColaboradores()
-        {
-            return _banco.Colaboradores.ToList();
-        }
-
         public IPagedList<Colaborador> ObterTodosColaboradores(int? pagina)
         {
             int numeroPagina = pagina ?? 1;
-            return _banco.Colaboradores.ToPagedList<Colaborador>(numeroPagina, _configuration.GetValue<int>("RegistroPorPagina"));
+            return _banco.Colaboradores.Where(a => a.Tipo != "G").ToPagedList<Colaborador>(numeroPagina, _configuration.GetValue<int>("RegistroPorPagina"));
         }
     }
 }
