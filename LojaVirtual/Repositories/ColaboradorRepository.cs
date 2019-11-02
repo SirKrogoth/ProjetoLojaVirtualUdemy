@@ -23,7 +23,7 @@ namespace LojaVirtual.Repositories
         
         public void Atualizar(Colaborador colaborador)
         {
-            _banco.Add(colaborador);
+            _banco.Update(colaborador);
             _banco.SaveChanges();
         }
 

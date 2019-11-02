@@ -33,7 +33,7 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
         }
 
         [HttpPost]
-        public IActionResult Cadastrar([FromBody] Models.Colaborador colaborador)
+        public IActionResult Cadastrar([FromForm]Models.Colaborador colaborador)
         {
             if(ModelState.IsValid)
             {
@@ -51,12 +51,22 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
         [HttpGet]
         public IActionResult Atualizar(int id)
         {
-            return View();
+             Models.Colaborador colaborador = _colaboradorRepository.ObterColaborador(id);
+
+            return View(colaborador);
         }
 
         [HttpPost]
-        public IActionResult Atualizar([FromBody] Models.Colaborador colaborador, int id)
+        public IActionResult Atualizar([FromForm] Models.Colaborador colaborador, int id)
         {
+            if(ModelState.IsValid)
+            {
+                _colaboradorRepository.Atualizar(colaborador);
+
+                TempData["MSG_S"] = Mensagem.MSG_S001;
+
+                return RedirectToAction(nameof(Index));
+            }
             return View();
         }
 
