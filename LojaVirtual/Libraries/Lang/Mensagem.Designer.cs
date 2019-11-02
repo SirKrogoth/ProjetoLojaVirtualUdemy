@@ -95,5 +95,23 @@ namespace LojaVirtual.Libraries.Lang {
                 return ResourceManager.GetString("MSG_Erro004", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O valor do campo {0} não confere com o valor do campo {1}..
+        /// </summary>
+        public static string MSG_Erro005 {
+            get {
+                return ResourceManager.GetString("MSG_Erro005", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Registro salvo com sucesso..
+        /// </summary>
+        public static string MSG_S001 {
+            get {
+                return ResourceManager.GetString("MSG_S001", resourceCulture);
+            }
+        }
     }
 }

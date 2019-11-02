@@ -23,11 +23,14 @@ namespace LojaVirtual.Models
         [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_Erro001")]
         [MinLength(6, ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_Erro002")]
         public string Senha { get; set; }
+        
+        
         [NotMapped]
+        [Display(Name = "Confirme a senha")]
+        [Compare("Senha", ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_Erro005")]
         public string ConfirmaSenha { get; set; }
 
         //Tipo C = Comum e tipo G = Gerente
-        [Required(ErrorMessageResourceType = typeof(Mensagem), ErrorMessageResourceName = "MSG_Erro001")]
         public string Tipo { get; set; }
     }
 }
