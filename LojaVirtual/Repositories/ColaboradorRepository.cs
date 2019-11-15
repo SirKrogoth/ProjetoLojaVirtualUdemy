@@ -35,7 +35,9 @@ namespace LojaVirtual.Repositories
 
         public void Excluir(int Id)
         {
-            _banco.Remove(Id);
+            Colaborador colaborador = ObterColaborador(Id);
+
+            _banco.Remove(colaborador);
             _banco.SaveChanges();
         }
 

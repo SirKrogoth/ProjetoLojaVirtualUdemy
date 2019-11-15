@@ -135,4 +135,7 @@
   <data name="MSG_S001" xml:space="preserve">
     <value>Registro salvo com sucesso.</value>
   </data>
+  <data name="MSG_S002" xml:space="preserve">
+    <value>Registro excluido com sucesso.</value>
+  </data>
 </root>

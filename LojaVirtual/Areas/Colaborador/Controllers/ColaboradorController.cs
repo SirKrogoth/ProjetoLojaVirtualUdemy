@@ -63,7 +63,7 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
             {
                 _colaboradorRepository.Atualizar(colaborador);
 
-                TempData["MSG_S"] = Mensagem.MSG_S001;
+                TempData["MSG_S"] = Mensagem.MSG_S002;
 
                 return RedirectToAction(nameof(Index));
             }
@@ -73,7 +73,10 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
         [HttpGet]
         public IActionResult Excluir(int id)
         {
-            return View();
+            _colaboradorRepository.Excluir(id);
+            TempData["MSG_S"] = Mensagem.MSG_S001;
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
