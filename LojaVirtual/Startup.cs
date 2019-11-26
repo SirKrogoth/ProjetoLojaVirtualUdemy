@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using LojaVirtual.Database;
 using LojaVirtual.Repositories;
@@ -46,6 +49,23 @@ namespace LojaVirtual
                                        ASP 2.2 -> https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/app-state?view=aspnetcore-2.2
                                        E também no Stackoverflow https://stackoverflow.com/questions/49317304/asp-net-core-2-1-session
                                        */
+
+            /*
+             * SMTP
+             */
+            services.AddScoped<SmtpClient>(options =>
+            {
+                SmtpClient smtp = new SmtpClient()
+                {
+                    Host = Configuration.GetValue<string>("Email:ServerSMTP"),
+                    Port = Configuration.GetValue<int>("Email:ServerPort"),
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(Configuration.GetValue<string>("Email:UserName"), Configuration.GetValue<string>("Email:Password"))
+                };
+
+                return smtp;
+            });
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
