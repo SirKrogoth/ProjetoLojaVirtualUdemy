@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using LojaVirtual.Database;
 using LojaVirtual.Libraries.Filtro;
 using LojaVirtual.Libraries.Sessao.Login;
 using LojaVirtual.Models;
 using LojaVirtual.Repositories;
+using LojaVirtual.wwwroot.Libraries.Email;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,12 +20,14 @@ namespace LojaVirtual.Controllers
         private IClienteRepository _clienteRepository;
         private INewsLetterRepository _newsLetterRepository;
         private LoginSessao _loginSessao;
+        private GerenciadorEmail _gerenciadorEmail;
 
-        public HomeController(IClienteRepository clienteRepository, INewsLetterRepository newsLetterRepository, LoginSessao loginSessao)
+        public HomeController(IClienteRepository clienteRepository, INewsLetterRepository newsLetterRepository, LoginSessao loginSessao, GerenciadorEmail gerenciadorEmail)
         {
             _clienteRepository = clienteRepository;
             _newsLetterRepository = newsLetterRepository;
             _loginSessao = loginSessao;
+            _gerenciadorEmail = gerenciadorEmail;
         }
 
         [HttpGet]
@@ -71,6 +76,45 @@ namespace LojaVirtual.Controllers
             {
                 ViewData["MSG_E"] = "Usuário não localizado, verifique os dados informados.";
                 return View();
+            }
+        }
+
+        public ActionResult ContatoAcao()
+        {
+            try
+            {
+                Contato contato = new Contato();
+
+                contato.Nome = HttpContext.Request.Form["nome"];
+                contato.Email = HttpContext.Request.Form["email"];
+                contato.Texto = HttpContext.Request.Form["texto"];
+
+                var listaMensagens = new List<ValidationResult>();
+                var contexto = new ValidationContext(contato);
+                bool isValid = Validator.TryValidateObject(contato, contexto, listaMensagens, true);
+
+                if (isValid)
+                {
+                    _gerenciadorEmail.EnviarContatoPorEmail(contato);
+
+                    ViewData["MSG_S"] = "Mensagem de contato enviada com sucesso!";
+                }
+                else
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    foreach (var texto in listaMensagens)
+                    {
+                        sb.Append(texto.ErrorMessage + "<br />");
+                    }
+
+                    ViewData["MSG_E"] = sb.ToString();
+                    ViewData["CONTATO"] = contato;
+                }
+
+            }
+            catch (Exception e)
+            {
             }
         }
 

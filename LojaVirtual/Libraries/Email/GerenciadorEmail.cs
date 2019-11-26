@@ -5,12 +5,23 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
 using LojaVirtual.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+using Microsoft.Extensions.Configuration;
 
 namespace LojaVirtual.wwwroot.Libraries.Email
 {
-    public class ContatoEmail
+    public class GerenciadorEmail
     {
-        public static void EnviarContatoPorEmail(Contato contato)
+        private SmtpClient _smtp;
+        private IConfiguration _configuration;
+
+        public GerenciadorEmail(SmtpClient smtp, IConfiguration configuration)
+        {
+            _smtp = smtp;
+            _configuration = configuration;
+        }
+
+        public void EnviarContatoPorEmail(Contato contato)
         {
             /*
              *SMTP -> Servidor que irá enviar as mensagens         
@@ -35,14 +46,14 @@ namespace LojaVirtual.wwwroot.Libraries.Email
              */
             MailMessage mensagem = new MailMessage();
 
-            mensagem.From = new MailAddress("menezes.jrafael@gmail.com");
+            mensagem.From = new MailAddress(_configuration.GetValue<string>("Email:UserName"));
             mensagem.To.Add("menezes.jrafael@gmail.com");
             mensagem.Subject = "Contato - LojaVirtual - Email: " + contato.Email;
             mensagem.Body = corpoMsg;
             mensagem.IsBodyHtml = true;
 
             //Enviar mensagem pelo protocolo SMTP
-            smtp.Send(mensagem);
+            _smtp.Send(mensagem);
         }
     }
 }

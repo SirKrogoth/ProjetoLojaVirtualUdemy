@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using LojaVirtual.Database;
 using LojaVirtual.Repositories;
+using LojaVirtual.wwwroot.Libraries.Email;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -65,6 +66,8 @@ namespace LojaVirtual
 
                 return smtp;
             });
+
+            services.AddScoped<GerenciadorEmail>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

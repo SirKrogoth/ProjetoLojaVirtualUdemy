@@ -34,7 +34,7 @@ namespace LojaVirtual.Controllers
             {
                 try
                 {
-                    ContatoEmail.EnviarContatoPorEmail(contato);
+                    GerenciadorEmail.EnviarContatoPorEmail(contato);
 
                     //Aqui deverá ter tratamento de erro.
                     ViewData["MSG_Success"] = "Email enviado com sucesso!";
