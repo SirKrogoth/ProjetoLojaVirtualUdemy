@@ -55,5 +55,33 @@ namespace LojaVirtual.wwwroot.Libraries.Email
             //Enviar mensagem pelo protocolo SMTP
             _smtp.Send(mensagem);
         }
+
+        public void EnviarSenhaParaColaboradorPorEmail(Colaborador colaborador)
+        {
+            /*
+             *SMTP -> Servidor que irá enviar as mensagens         
+             */
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new NetworkCredential("menezes.jrafael@gmail.com", "506829506829");
+            smtp.EnableSsl = true;
+
+            string corpoMsg = string.Format("<h2>Contato - LojaVirtual</h2>" +
+                                            "Sua senha é:" +
+                                            "<h3>{0}</h3>", colaborador.Senha);
+
+            MailMessage mensagem = new MailMessage();
+
+            mensagem.From = new MailAddress(_configuration.GetValue<string>("Email:UserName"));
+
+            mensagem.To.Add(colaborador.Email);
+            mensagem.Subject = "Colaborador - LojaVirtual - Senha do Colaborador: " + colaborador.Senha;
+            mensagem.Body = corpoMsg;
+            mensagem.IsBodyHtml = true;
+
+            //Enviar mensagem pelo protocolo SMTP
+            _smtp.Send(mensagem);
+        }
     }
 }

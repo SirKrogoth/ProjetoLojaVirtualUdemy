@@ -12,6 +12,13 @@ namespace LojaVirtual.Controllers
 {
     public class ContatoController : Controller
     {
+        private GerenciadorEmail _gerenciadorEmail;
+
+        public ContatoController(GerenciadorEmail gerenciadorEmail)
+        {
+            _gerenciadorEmail = gerenciadorEmail;
+        }
+
         public IActionResult Contato()
         {
             return View();
@@ -34,7 +41,7 @@ namespace LojaVirtual.Controllers
             {
                 try
                 {
-                    GerenciadorEmail.EnviarContatoPorEmail(contato);
+                    _gerenciadorEmail.EnviarContatoPorEmail(contato);
 
                     //Aqui deverá ter tratamento de erro.
                     ViewData["MSG_Success"] = "Email enviado com sucesso!";

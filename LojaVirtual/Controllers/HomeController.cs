@@ -112,9 +112,13 @@ namespace LojaVirtual.Controllers
                     ViewData["CONTATO"] = contato;
                 }
 
+                return Ok();
+
             }
             catch (Exception e)
             {
+                ViewData["MSG_E"] = e.Message;
+                return Ok();
             }
         }
 
