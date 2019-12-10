@@ -6,14 +6,15 @@
 <h2>Cadastrar</h2>
 
 <form method="post" action="">
+    <div asp-validation-summary="All"></div>
     <div class="form-group">
         <label asp-for="Nome"></label>
-        <input asp-for="Nome" class="form-control" placeholder="Digite o nome do colaborador" />
+        <input asp-for="Nome" class="form-control" placeholder="Digite o nome do colaborador"/>
         <span asp-validation-for="Nome" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" placeholder="Digite o e-mail do colaborador" />
+        <input asp-for="Email" class="form-control" placeholder="Digite o e-mail do colaborador"/>
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Salvar</button>

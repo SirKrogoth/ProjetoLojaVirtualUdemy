@@ -8,6 +8,7 @@ using LojaVirtual.Repositories;
 using LojaVirtual.wwwroot.Libraries.Email;
 using Microsoft.AspNetCore.Identity.UI.Pages.Internal.Account.Manage;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using X.PagedList;
 
 namespace LojaVirtual.Areas.Colaborador.Controllers
@@ -54,12 +55,14 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
         [HttpPost]
         public IActionResult Cadastrar([FromForm]Models.Colaborador colaborador)
         {
+            ModelState.Remove("Senha");
             if(ModelState.IsValid)
             {
-                //TODO - Gerar senha aleartória, salvar nova, enviar e-mail
-
                 colaborador.Tipo = "C";
+                colaborador.Senha = KeyGenerator.GetUniqueKey(8);
                 _colaboradorRepository.Cadastrar(colaborador);
+
+                _gerenciadorEmail.EnviarSenhaParaColaboradorPorEmail(colaborador);
 
                 TempData["MSG_S"] = Mensagem.MSG_S001;
 
