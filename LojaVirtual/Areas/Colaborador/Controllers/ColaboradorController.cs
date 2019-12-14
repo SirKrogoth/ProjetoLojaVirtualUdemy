@@ -37,7 +37,7 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
         {
             Models.Colaborador colaborador = _colaboradorRepository.ObterColaborador(id);
             colaborador.Senha = KeyGenerator.GetUniqueKey(8);
-            _colaboradorRepository.Atualizar(colaborador);
+            _colaboradorRepository.AtualizarSenha(colaborador);
                 
             _gerenciadorEmail.EnviarSenhaParaColaboradorPorEmail(colaborador);
 
@@ -55,6 +55,7 @@ namespace LojaVirtual.Areas.Colaborador.Controllers
         [HttpPost]
         public IActionResult Cadastrar([FromForm]Models.Colaborador colaborador)
         {
+            //Sistema irá ignorar o campo senha
             ModelState.Remove("Senha");
             if(ModelState.IsValid)
             {

@@ -13,6 +13,7 @@ namespace LojaVirtual.Repositories
 
         void Cadastrar(Colaborador colaborador);
         void Atualizar(Colaborador colaborador);
+        void AtualizarSenha(Colaborador colaborador);
         void Excluir(int Id);
 
         Colaborador ObterColaborador(int Id);
